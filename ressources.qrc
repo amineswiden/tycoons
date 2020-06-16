@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/img">
+        <file>img/add.png</file>
+        <file>img/delete.png</file>
+        <file>img/edit.png</file>
+        <file>img/EST-logo2.png</file>
+        <file>img/lagou.jpg</file>
+        <file>img/rech.png</file>
+        <file>img/Trie.png</file>
+        <file>img/pdf.png</file>
+        <file>img/téléchargement (3).jpg</file>
+        <file>img/koura.png</file>
+        <file>img/koura1.png</file>
+    </qresource>
+</RCC>

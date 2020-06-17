@@ -22,7 +22,7 @@ class Dialog : public QDialog
 public:
     explicit Dialog(QWidget *parent = nullptr);
     ~Dialog();
-    QMediaPlayer *correct =new QMediaPlayer();
+    //QMediaPlayer *correct =new QMediaPlayer();
     QMediaPlayer *incorrect =new QMediaPlayer();
     private slots:
     void sendMail();
@@ -242,6 +242,14 @@ public:
        void on_pb_ajouter_menuanis_clicked();
 
        void on_pushButton_match_clicked();
+
+       void on_tabmatch_clicked(const QModelIndex &index);
+
+       void on_tabbillet_clicked(const QModelIndex &index);
+
+       void on_pb_ajouter_image_clicked();
+
+       void on_pb_modifier_image_clicked();
 
 private:
     Ui::Dialog *ui;

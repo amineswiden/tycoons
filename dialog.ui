@@ -29,7 +29,7 @@
     <enum>QFrame::Plain</enum>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="page">
     <widget class="QLabel" name="label">
@@ -2391,27 +2391,6 @@ background-color: rgb(24, 33, 2);
 	selection-color:#ffffff</string>
         </property>
        </widget>
-       <widget class="QLineEdit" name="lineEdit_pho">
-        <property name="geometry">
-         <rect>
-          <x>180</x>
-          <y>381</y>
-          <width>159</width>
-          <height>20</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">border-width: 1px; border-radius: 4px;
-	border-color: rgb(58, 58, 58);
-	border-style: inset;
-	padding: 0 8px;
-	color: rgb(255, 255, 255);
-	
-background-color: rgb(24, 33, 2);
-	selection-background-color:#ffffff;
-	selection-color:#ffffff</string>
-        </property>
-       </widget>
        <widget class="QPushButton" name="pushButton_3">
         <property name="geometry">
          <rect>
@@ -2433,6 +2412,115 @@ color: rgb(255, 255, 255);</string>
         </property>
         <property name="text">
          <string>menu</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pb_ajouter_image">
+        <property name="geometry">
+         <rect>
+          <x>21</x>
+          <y>50</y>
+          <width>151</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>century gothic</family>
+          <pointsize>-1</pointsize>
+          <weight>9</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="whatsThis">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 75 6pt &quot;MS Shell Dlg 2&quot;;
+background-color:rgb(0, 0, 0);
+border-radius: 4px;
+	border-color: rgb(58, 58, 58);
+	border-style: inset;
+font-family: century gothic;
+font-size: 18px;
+color: rgb(255, 255, 255);
+
+</string>
+        </property>
+        <property name="text">
+         <string>Ajouter image</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pb_modifier_image">
+        <property name="geometry">
+         <rect>
+          <x>21</x>
+          <y>90</y>
+          <width>151</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>century gothic</family>
+          <pointsize>-1</pointsize>
+          <weight>9</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;modifier image&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 75 6pt &quot;MS Shell Dlg 2&quot;;
+background-color:rgb(0, 0, 0);
+border-radius: 4px;
+	border-color: rgb(58, 58, 58);
+	border-style: inset;
+font-family: century gothic;
+font-size: 18px;
+color: rgb(255, 255, 255);
+
+</string>
+        </property>
+        <property name="text">
+         <string>Modifier image</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="photo">
+        <property name="geometry">
+         <rect>
+          <x>190</x>
+          <y>20</y>
+          <width>141</width>
+          <height>131</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Box</enum>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="chemin">
+        <property name="geometry">
+         <rect>
+          <x>180</x>
+          <y>380</y>
+          <width>151</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Chemin&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
        <zorder>label_18</zorder>
@@ -2461,8 +2549,11 @@ color: rgb(255, 255, 255);</string>
        <zorder>lineEdit_code</zorder>
        <zorder>lineEdit_qte</zorder>
        <zorder>lineEdit_des</zorder>
-       <zorder>lineEdit_pho</zorder>
        <zorder>pushButton_3</zorder>
+       <zorder>pb_ajouter_image</zorder>
+       <zorder>pb_modifier_image</zorder>
+       <zorder>photo</zorder>
+       <zorder>chemin</zorder>
       </widget>
       <widget class="QLabel" name="label_Pic">
        <property name="geometry">
@@ -4164,7 +4255,7 @@ margin-top: 2px; /* make non-selected tabs look smaller */
 }</string>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab_6">
       <attribute name="title">
@@ -4296,27 +4387,6 @@ color: rgb(255, 255, 255);</string>
         </property>
         <property name="text">
          <string>quitter</string>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="lineEdit_poste_2">
-        <property name="geometry">
-         <rect>
-          <x>140</x>
-          <y>370</y>
-          <width>131</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string>border-width: 1px; border-radius: 4px;
-	border-color: rgb(58, 58, 58);
-	border-style: inset;
-	padding: 0 8px;
-	color: rgb(255, 255, 255);
-	
-background-color: rgb(24, 33, 2);
-	selection-background-color:#ffffff;
-	selection-color:#ffffff</string>
         </property>
        </widget>
        <widget class="QLineEdit" name="lineEdit_nom_2">
@@ -4744,6 +4814,51 @@ background-color: rgb(24, 33, 2);
          <string/>
         </property>
        </widget>
+       <widget class="QComboBox" name="comboBox_2">
+        <property name="geometry">
+         <rect>
+          <x>140</x>
+          <y>371</y>
+          <width>131</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <item>
+         <property name="text">
+          <string>medical</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>dirigeant</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>entraineur</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>commercial</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>financier</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>ouvrier</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>agent de securite</string>
+         </property>
+        </item>
+       </widget>
       </widget>
       <widget class="QLabel" name="label_58">
        <property name="geometry">
@@ -4848,27 +4963,6 @@ color: rgb(255, 255, 255);</string>
         </property>
         <property name="text">
          <string>quitter</string>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="lineEdit_type_2">
-        <property name="geometry">
-         <rect>
-          <x>160</x>
-          <y>280</y>
-          <width>151</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">border-width: 1px; border-radius: 4px;
-	border-color: rgb(58, 58, 58);
-	border-style: inset;
-	padding: 0 8px;
-	color: rgb(255, 255, 255);
-	
-background-color: rgb(24, 33, 2);
-	selection-background-color:#ffffff;
-	selection-color:#ffffff</string>
         </property>
        </widget>
        <widget class="QPushButton" name="pushButton_ajouterd_2">
@@ -5186,6 +5280,51 @@ color: rgb(255, 255, 255);</string>
           <height>301</height>
          </rect>
         </property>
+       </widget>
+       <widget class="QComboBox" name="comboBox_3">
+        <property name="geometry">
+         <rect>
+          <x>160</x>
+          <y>290</y>
+          <width>151</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <item>
+         <property name="text">
+          <string>medical</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>dirigeant</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>entraineur</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>commercial</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>financier</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>ouvrier</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>agent de securite</string>
+         </property>
+        </item>
        </widget>
       </widget>
       <widget class="QLabel" name="label_64">
@@ -5618,27 +5757,6 @@ background-color: rgb(24, 33, 2);
 	selection-color:#ffffff</string>
         </property>
        </widget>
-       <widget class="QLineEdit" name="lineEdit_type_3">
-        <property name="geometry">
-         <rect>
-          <x>180</x>
-          <y>230</y>
-          <width>113</width>
-          <height>20</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">border-width: 1px; border-radius: 4px;
-	border-color: rgb(58, 58, 58);
-	border-style: inset;
-	padding: 0 8px;
-	color: rgb(255, 255, 255);
-	
-background-color: rgb(24, 33, 2);
-	selection-background-color:#ffffff;
-	selection-color:#ffffff</string>
-        </property>
-       </widget>
        <widget class="QPushButton" name="pb_ajouter">
         <property name="geometry">
          <rect>
@@ -5685,27 +5803,6 @@ color: rgb(255, 255, 255);</string>
         </property>
         <property name="text">
          <string>placement</string>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="lineEdit_date">
-        <property name="geometry">
-         <rect>
-          <x>180</x>
-          <y>120</y>
-          <width>113</width>
-          <height>20</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">border-width: 1px; border-radius: 4px;
-	border-color: rgb(58, 58, 58);
-	border-style: inset;
-	padding: 0 8px;
-	color: rgb(255, 255, 255);
-	
-background-color: rgb(24, 33, 2);
-	selection-background-color:#ffffff;
-	selection-color:#ffffff</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_70">
@@ -5856,9 +5953,48 @@ color: rgb(255, 255, 255);</string>
          <string>modifier</string>
         </property>
        </widget>
+       <widget class="QDateEdit" name="dateEdit_2">
+        <property name="geometry">
+         <rect>
+          <x>180</x>
+          <y>120</y>
+          <width>110</width>
+          <height>22</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="comboBox">
+        <property name="geometry">
+         <rect>
+          <x>180</x>
+          <y>230</y>
+          <width>111</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <item>
+         <property name="text">
+          <string>volleyball</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>basketball</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>football</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>handball</string>
+         </property>
+        </item>
+       </widget>
        <zorder>label_57</zorder>
        <zorder>label_67</zorder>
-       <zorder>lineEdit_type_3</zorder>
        <zorder>label_68</zorder>
        <zorder>label_69</zorder>
        <zorder>label_70</zorder>
@@ -5867,7 +6003,6 @@ color: rgb(255, 255, 255);</string>
        <zorder>pb_supprimer</zorder>
        <zorder>lineEdit_placement</zorder>
        <zorder>pb_ajouter</zorder>
-       <zorder>lineEdit_date</zorder>
        <zorder>lineEdit_supctr</zorder>
        <zorder>pushButton_rech_match</zorder>
        <zorder>pushButton_tri_match</zorder>
@@ -5876,6 +6011,8 @@ color: rgb(255, 255, 255);</string>
        <zorder>widget_anis</zorder>
        <zorder>pushButton_26</zorder>
        <zorder>pushButton_modifanis1</zorder>
+       <zorder>dateEdit_2</zorder>
+       <zorder>comboBox</zorder>
       </widget>
       <widget class="QLabel" name="label_71">
        <property name="geometry">

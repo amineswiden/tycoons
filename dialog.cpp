@@ -15,6 +15,7 @@
 #include "match.h"
 #include "billet.h"
 #include <QPainter>
+#include <QFileDialog>
 #include <QPrinter>
 #define CARACTERES_ETRANGERS "~{}[]()|-`'^ç@_]\"°01234567890+=£$*µ/§!?,.&#;><"
 #define CARACTERES_ALPHA "azertyuiopqsdfghjklmùwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN"
@@ -62,7 +63,7 @@ Dialog::Dialog(QWidget *parent) :
           value4[0]=tmpmatch.get_gagne() ,value4[1]=tmpmatch.get_perdu();
           ui->widget_anis->setData(value4,color4);
 
-    QRegExp rx("[A-Za-z]+");
+   /* QRegExp rx("[A-Za-z]+");
     QValidator *validator = new QRegExpValidator(rx, this);
     ui->lineEdit_nom->setValidator( validator );
     ui->lineEdit_prenom->setValidator( validator );
@@ -77,41 +78,41 @@ Dialog::Dialog(QWidget *parent) :
     ui->lineEdit_num_maillot->setValidator( new QIntValidator(0, 99999999, this) );
     ui->lineEdit_age->setValidator( new QIntValidator(0, 99999999, this) );
     ui->lineEdit_cap_att->setValidator( new QIntValidator(0, 99999999, this) );
-    ui->lineEdit_cap_def->setValidator( new QIntValidator(0, 99999999, this) );
+    ui->lineEdit_cap_def->setValidator( new QIntValidator(0, 99999999, this) );*/
     ui->tablejoueur->setModel(tmpjoueur.afficher());
     ui->tablediscipline->setModel(tmpdiscipline.afficher());
     connect(ui->pushButton_13, SIGNAL(clicked()),this, SLOT(sendMail()));
 
 
-    ui->lineEdit_nom_2->setValidator( validator );
+  /*  ui->lineEdit_nom_2->setValidator( validator );
     ui->lineEdit_prenom_2->setValidator( validator );
-    ui->lineEdit_poste_2->setValidator( validator );
-    ui->lineEdit_type_2->setValidator( validator );
+    ui->comboBox_2->setValidator( validator );
+    ui->comboBox_3->setValidator( validator );
     ui->lineEdit_id_2->setValidator( new QIntValidator(0, 99999999, this) );
     ui->lineEdit_id2_2->setValidator( new QIntValidator(0, 99999999, this) );
     ui->lineEdit_nb_2->setValidator( new QIntValidator(0, 99999999, this) );
     ui->lineEdit_cin_2->setValidator( new QIntValidator(0, 99999999, this) );
     ui->lineEdit_cins->setValidator( new QIntValidator(0, 99999999, this) );
     ui->lineEdit_age_2->setValidator( new QIntValidator(0, 99999999, this) );
-    ui->lineEdit_tel->setValidator( new QIntValidator(0, 99999999, this) );
+    ui->lineEdit_tel->setValidator( new QIntValidator(0, 99999999, this) );*/
     ui->tablestaff->setModel(tmpstaff.afficher());
     ui->tablecategorie->setModel(tmpcategorie.afficher());
     connect(ui->pushButton_23, SIGNAL(clicked()),this, SLOT(sendMail2()));
 
 
     //ui->lineEdit_code->setValidator( new QIntValidator(0, 99999999, this) );
-    ui->lineEdit_prix->setValidator( new QIntValidator(0, 99999999, this) );
+  /*  ui->lineEdit_prix->setValidator( new QIntValidator(0, 99999999, this) );
     ui->lineEdit_qte->setValidator( new QIntValidator(0, 99999999, this) );
     ui->lineEdit_idp->setValidator( new QIntValidator(0, 99999999, this) );
 
-    ui->lineEdit_idc->setValidator( new QIntValidator(0, 99999999, this) );
+    ui->lineEdit_idc->setValidator( new QIntValidator(0, 99999999, this) );*/
 
     QRegExp rx1("[A-Za-z]+");
-        QValidator *validator1 = new QRegExpValidator(rx1, this);
-        ui->lineEdit_des->setValidator( validator1 );
-        ui->lineEdit_pho->setValidator( validator1 );
+        //QValidator *validator1 = new QRegExpValidator(rx1, this);
+     /*   ui->lineEdit_des->setValidator( validator1 );
+        //ui->chemin->setValidator( validator1 );
         ui->lineEdit_col->setValidator( validator1 );
-        ui->lineEdit_nom->setValidator( validator1 );
+        ui->lineEdit_nom->setValidator( validator1 );*/
 
     ui->tabproduits->setModel(tmproduits.afficher());//refresh
     ui->tabCat->setModel(tmpcat.afficher());//refresh
@@ -123,8 +124,13 @@ Dialog::Dialog(QWidget *parent) :
 /*ui->statusbar->addPermanentWidget(ui->label_8,1);
 ui->statusbar->addPermanentWidget(ui->progressBar,3);*/
 
-    correct->setMedia(QUrl("")); //ajouter l'url du son
-    incorrect->setMedia(QUrl("")); //ajouter l'url du son
+    //correct->setMedia(QUrl("")); //ajouter l'url du son
+    incorrect =new QMediaPlayer();
+
+    incorrect->setMedia(QUrl("C:/Users/amine/Documents/est_sport/incorrect.mp3")); //ajouter l'url du son
+    incorrect->setVolume(100);
+    incorrect->play();
+
 ui->tabmatch->setModel(tmpmatch.afficher());
 ui->tabbillet->setModel(tmpbillet.afficher());//refresh
   connect(ui->pushButton_envoyera, SIGNAL(clicked()),this, SLOT(sendMail1()));
@@ -142,7 +148,7 @@ void ::Dialog::initialiser_p()
     ui->lineEdit_prix->setText("");
     ui->lineEdit_qte->setText("");
     ui->lineEdit_des->setText("");
-    ui->lineEdit_pho->setText("");
+    //ui->lineEdit_pho->setText("");
     ui->lineEdit_col->setText("");
     ui->lineEdit_idp->setText("");
 }
@@ -454,7 +460,7 @@ void Dialog::on_pushButton_ajoutp_clicked()
     int idp=ui->lineEdit_idp->text().toInt();
     int qte=ui->lineEdit_qte->text().toInt();
     QString des=ui->lineEdit_des->text();
-    QString pho=ui->lineEdit_pho->text();
+    QString pho=ui->chemin->text();
     QString col=ui->lineEdit_col->text();
     Produits p(code,prix,qte,des,pho,col,idp);
    initialiser_p();
@@ -481,7 +487,7 @@ void Dialog::on_pushButton_modifp_clicked()
     int idp=ui->lineEdit_idp->text().toInt();
     int qte=ui->lineEdit_qte->text().toInt();
     QString des=ui->lineEdit_des->text();
-    QString pho=ui->lineEdit_pho->text();
+    QString pho=ui->chemin->text();
     QString col=ui->lineEdit_col->text();
     Produits p(code,prix,qte,des,pho,col,idp);
     bool test=p.modifier();
@@ -677,7 +683,7 @@ void Dialog::on_tabproduits_clicked()
       ui->lineEdit_prix->setText(model->index(rowidx , 1).data().toString());
       ui->lineEdit_qte->setText(model->index(rowidx , 2).data().toString());
       ui->lineEdit_des->setText(model->index(rowidx , 3).data().toString());
-      ui->lineEdit_pho->setText(model->index(rowidx , 4).data().toString());
+      ui->chemin->setText(model->index(rowidx , 4).data().toString());
       ui->lineEdit_col->setText(model->index(rowidx , 5).data().toString());
       ui->lineEdit_idp->setText(model->index(rowidx , 6).data().toString());
 }
@@ -918,11 +924,11 @@ void Dialog::on_pushButton_6_clicked()
 
 void Dialog::on_pushButton_8_clicked()
 {
-    int cin =ui->lineEdit_cin->text().toInt();
-        QString nom=ui->lineEdit_nom->text();
-        QString prenom=ui->lineEdit_prenom->text();
-        QString poste=ui->lineEdit_poste->text();
-        int age=ui->lineEdit_age->text().toInt();
+    int cin =ui->lineEdit_cin_2->text().toInt();
+        QString nom=ui->lineEdit_nom_2->text();
+        QString prenom=ui->lineEdit_prenom_2->text();
+        QString poste=ui->comboBox_2->currentText();
+        int age=ui->lineEdit_age_2->text().toInt();
         int tel=ui->lineEdit_tel->text().toInt();
         staff S (cin,nom,prenom,poste,age,tel);
         bool test= S.ajouter();
@@ -947,11 +953,11 @@ QMessageBox::information(nullptr, QObject::tr("Ajouter un staff"),
 
 void Dialog::on_pushButton_14_clicked()
 {
-    int cin =ui->lineEdit_cin->text().toInt();
-    QString nom=ui->lineEdit_nom->text();
-    QString prenom=ui->lineEdit_prenom->text();
-    QString poste=ui->lineEdit_poste->text();
-    int age=ui->lineEdit_age->text().toInt();
+    int cin =ui->lineEdit_cin_2->text().toInt();
+        QString nom=ui->lineEdit_nom_2->text();
+        QString prenom=ui->lineEdit_prenom_2->text();
+        QString poste=ui->comboBox_2->currentText();
+        int age=ui->lineEdit_age_2->text().toInt();
         int tel=ui->lineEdit_tel->text().toInt();
     staff S (cin,nom,prenom,poste,age,tel);
     bool test= S.modifier();
@@ -973,7 +979,7 @@ QMessageBox::information(nullptr, QObject::tr("modifier un staff"),
 
 void Dialog::on_pushButton_15_clicked()
 {
-    int cin = ui->lineEdit->text().toInt();
+    int cin = ui->lineEdit_cins->text().toInt();
     bool test=tmpstaff.supprimer(cin);
     ui->lineEdit->setText("");
     if(test)
@@ -991,7 +997,7 @@ void Dialog::on_pushButton_15_clicked()
 
 void Dialog::on_pushButton_18_clicked()
 {
-    QString nom = ui->lineEdit_2->text();
+    QString nom = ui->lineEdit_5->text();
            ui->tablestaff->setModel(tmpstaff.rechercher(nom));
 }
 
@@ -1007,7 +1013,7 @@ void Dialog::on_tablestaff_clicked()
         ui->lineEdit_cin->setText(model->index(idx , 0).data().toString());
         ui->lineEdit_nom->setText(model->index(idx , 1).data().toString());
         ui->lineEdit_prenom->setText(model->index(idx , 2).data().toString());
-        ui->lineEdit_poste->setText(model->index(idx , 3).data().toString());
+        ui->comboBox_2->setCurrentText(model->index(idx , 3).data().toString());
         ui->lineEdit_age->setText(model->index(idx , 4).data().toString());
         ui->lineEdit_tel->setText(model->index(idx , 5).data().toString());
 }
@@ -1023,7 +1029,7 @@ void Dialog::on_pushButton_ajouterd_2_clicked()
 {
     int id =ui->lineEdit_id_2->text().toInt();
      int nb_heures=ui->lineEdit_nb_2->text().toInt();
-     QString type=ui->lineEdit_type_2->text();
+     QString type=ui->comboBox_3->currentText();
      int salaire=ui->lineEdit_sal->text().toInt();
 
 
@@ -1050,7 +1056,7 @@ void Dialog::on_pushButton_20_clicked()
 
     int id =ui->lineEdit_id_2->text().toInt();
      int nb_heures=ui->lineEdit_nb_2->text().toInt();
-     QString type=ui->lineEdit_type_2->text();
+     QString type=ui->comboBox_3->currentText();
      int salaire=ui->lineEdit_sal->text().toInt();
 
 
@@ -1105,7 +1111,7 @@ void Dialog::on_tablecategorie_clicked()
 {  QSqlQueryModel * model=tmpcategorie.afficher();
     int idx = ui->tablecategorie->selectionModel()->currentIndex().row();
    ui->lineEdit_id_2->setText(model->index(idx , 0).data().toString());
-   ui->lineEdit_type_2->setText(model->index(idx , 1).data().toString());
+   ui->comboBox_3->setCurrentText(model->index(idx , 1).data().toString());
    ui->lineEdit_nb_2->setText(model->index(idx , 2).data().toString());
    ui->lineEdit_sal->setText(model->index(idx , 3).data().toString());
 
@@ -1206,7 +1212,7 @@ QMessageBox::information(nullptr, QObject::tr("Ajouter un billet"),
 
 void Dialog::on_pb_supprimer_billet_clicked()
 {
-    QString  id = ui->lineEdit_id_3->text();
+    QString  id = ui->lineEdit_ctqui_4->text();
 bool test = tmpbillet.supprimer(id);
 if(test)
 {   ui->tabbillet->setModel(tmpbillet.afficher());//refresh
@@ -1223,22 +1229,23 @@ else
 
 void Dialog::on_pushButton_trieBillet_clicked()
 {
-    QString type = ui->lineEdit_ctqui_4->text();
-         ui->tabbillet->setModel(tmpbillet.rechercher(type));
+    ui->tabbillet->setModel(tmpbillet.trier());
 }
 
 void Dialog::on_pushButton_supBillet_clicked()
 {
-    ui->tabbillet->setModel(tmpbillet.trier());
+
+    QString type = ui->lineEdit_ctqui_4->text();
+         ui->tabbillet->setModel(tmpbillet.rechercher(type));
 
 }
 
 void Dialog::on_pb_ajouter_clicked()
 {
     QString ctqui= ui->lineEdit_ctqui->text();
-    QString dat= ui->lineEdit_date->text();
+    QDate dat= ui->dateEdit_2->date();
     QString placement= ui->lineEdit_placement->text();
-    QString type= ui->lineEdit_type_3->text();
+    QString type= ui->comboBox->currentText();
     QString etat= ui->lineEdit_etat->text();
   match e(ctqui,dat,placement,type,etat);
   bool test=e.ajouter();
@@ -1258,7 +1265,7 @@ QMessageBox::information(nullptr, QObject::tr("Ajouter un match"),
 
 void Dialog::on_pb_supprimer_clicked()
 {
-    QString  ctqui = ui->lineEdit_ctqui->text();
+    QString  ctqui = ui->lineEdit_supctr->text();
 bool test = tmpmatch.supprimer(ctqui);
 if(test)
 {ui->tabmatch->setModel(tmpmatch.afficher());//refresh
@@ -1346,7 +1353,7 @@ void Dialog::on_lineEdit_code_textChanged(const QString &arg1)
      if(texte.at(i)==y)
     {
          texte[i]=' ';
-         //incorrect->play();
+         incorrect->play();
      }
 
   ui->lineEdit_code->setText(texte);
@@ -1361,7 +1368,7 @@ void Dialog::on_lineEdit_prix_textChanged(const QString &arg1)
      if(texte.at(i)==y)
     {
          texte[i]=' ';
-         //incorrect->play();
+         incorrect->play();
      }
 
   ui->lineEdit_prix->setText(texte);
@@ -1377,10 +1384,10 @@ void Dialog::on_lineEdit_qte_textChanged(const QString &arg1)
      if(texte.at(i)==y)
     {
          texte[i]=' ';
-         //incorrect->play();
+         incorrect->play();
      }
 
-  ui->lineEdit_code->setText(texte);
+  ui->lineEdit_qte->setText(texte);
 }
 
 void Dialog::on_lineEdit_des_textEdited(const QString &arg1)
@@ -1391,7 +1398,7 @@ for (int i=0; i<texte.size(); i++)
 foreach (const QChar &y, caracteresEtrangers)
     if(texte.at(i)==y)
     {texte[i]=' ';
-    // incorrect->play();
+   incorrect->play();
     }
 
  ui->lineEdit_des->setText(texte);
@@ -1407,7 +1414,7 @@ for (int i=0; i<texte.size(); i++)
 foreach (const QChar &y, caracteresEtrangers)
     if(texte.at(i)==y)
     {texte[i]=' ';
-    // incorrect->play();
+   incorrect->play();
     }
 
  ui->lineEdit_col->setText(texte);
@@ -1423,7 +1430,7 @@ void Dialog::on_lineEdit_idp_textChanged(const QString &arg1)
      if(texte.at(i)==y)
     {
          texte[i]=' ';
-         //incorrect->play();
+         incorrect->play();
      }
 
   ui->lineEdit_idp->setText(texte);
@@ -1439,7 +1446,7 @@ void Dialog::on_lineEdit_idc_textChanged(const QString &arg1)
      if(texte.at(i)==y)
     {
          texte[i]=' ';
-         //incorrect->play();
+         incorrect->play();
      }
 
   ui->lineEdit_idc->setText(texte);
@@ -1454,7 +1461,7 @@ for (int i=0; i<texte.size(); i++)
 foreach (const QChar &y, caracteresEtrangers)
     if(texte.at(i)==y)
     {texte[i]=' ';
-    // incorrect->play();
+   incorrect->play();
     }
 
  ui->lineEdit_nomc->setText(texte);
@@ -1471,7 +1478,7 @@ void Dialog::on_lineEdit_ida_textChanged(const QString &arg1)
      if(texte.at(i)==y)
     {
          texte[i]=' ';
-         //incorrect->play();
+         incorrect->play();
      }
 
   ui->lineEdit_ida->setText(texte);
@@ -1486,7 +1493,7 @@ void Dialog::on_lineEdit_prixa_textChanged(const QString &arg1)
      if(texte.at(i)==y)
     {
          texte[i]=' ';
-         //incorrect->play();
+         incorrect->play();
      }
 
   ui->lineEdit_prixa->setText(texte);
@@ -1501,7 +1508,7 @@ for (int i=0; i<texte.size(); i++)
 foreach (const QChar &y, caracteresEtrangers)
     if(texte.at(i)==y)
     {texte[i]=' ';
-    // incorrect->play();
+   incorrect->play();
     }
 
  ui->lineEdit_typea->setText(texte);
@@ -1518,7 +1525,7 @@ void Dialog::on_lineEdit_cina_textChanged(const QString &arg1)
      if(texte.at(i)==y)
     {
          texte[i]=' ';
-         //incorrect->play();
+         incorrect->play();
      }
 
   ui->lineEdit_cina->setText(texte);
@@ -1533,7 +1540,7 @@ for (int i=0; i<texte.size(); i++)
 foreach (const QChar &y, caracteresEtrangers)
     if(texte.at(i)==y)
     {texte[i]=' ';
-    // incorrect->play();
+   incorrect->play();
     }
 
  ui->lineEdit_noma->setText(texte);
@@ -1550,7 +1557,7 @@ for (int i=0; i<texte.size(); i++)
 foreach (const QChar &y, caracteresEtrangers)
     if(texte.at(i)==y)
     {texte[i]=' ';
-    // incorrect->play();
+   incorrect->play();
     }
 
  ui->lineEdit_prenoma->setText(texte);
@@ -1565,7 +1572,7 @@ void Dialog::on_lineEdit_numa_textChanged(const QString &arg1)
      if(texte.at(i)==y)
     {
          texte[i]=' ';
-         //incorrect->play();
+         incorrect->play();
      }
 
   ui->lineEdit_numa->setText(texte);
@@ -1580,7 +1587,7 @@ for (int i=0; i<texte.size(); i++)
 foreach (const QChar &y, caracteresEtrangers)
     if(texte.at(i)==y)
     {texte[i]=' ';
-    // incorrect->play();
+   incorrect->play();
     }
 
  ui->lineEdit_adressea->setText(texte);
@@ -1596,7 +1603,7 @@ void Dialog::on_lineEdit_cin_2_textChanged(const QString &arg1)
      if(texte.at(i)==y)
     {
          texte[i]=' ';
-         //incorrect->play();
+         incorrect->play();
      }
 
   ui->lineEdit_cin_2->setText(texte);
@@ -1611,7 +1618,7 @@ for (int i=0; i<texte.size(); i++)
 foreach (const QChar &y, caracteresEtrangers)
     if(texte.at(i)==y)
     {texte[i]=' ';
-    // incorrect->play();
+   incorrect->play();
     }
 
 ui->lineEdit_nom_2->setText(texte);
@@ -1625,7 +1632,7 @@ for (int i=0; i<texte.size(); i++)
 foreach (const QChar &y, caracteresEtrangers)
     if(texte.at(i)==y)
     {texte[i]=' ';
-    // incorrect->play();
+   incorrect->play();
     }
 
 ui->lineEdit_prenom_2->setText(texte);
@@ -1640,10 +1647,10 @@ for (int i=0; i<texte.size(); i++)
 foreach (const QChar &y, caracteresEtrangers)
     if(texte.at(i)==y)
     {texte[i]=' ';
-    // incorrect->play();
+   incorrect->play();
     }
 
- ui->lineEdit_poste_2->setText(texte);
+ ui->comboBox_3->setCurrentText(texte);
 }
 
 void Dialog::on_lineEdit_age_2_textEdited(const QString &arg1)
@@ -1655,7 +1662,7 @@ void Dialog::on_lineEdit_age_2_textEdited(const QString &arg1)
      if(texte.at(i)==y)
     {
          texte[i]=' ';
-         //incorrect->play();
+         incorrect->play();
      }
 
   ui->lineEdit_age_2->setText(texte);
@@ -1670,7 +1677,7 @@ void Dialog::on_lineEdit_tel_textEdited(const QString &arg1)
      if(texte.at(i)==y)
     {
          texte[i]=' ';
-         //incorrect->play();
+         incorrect->play();
      }
 
   ui->lineEdit_tel->setText(texte);
@@ -1686,7 +1693,7 @@ void Dialog::on_lineEdit_id_2_textChanged(const QString &arg1)
      if(texte.at(i)==y)
     {
          texte[i]=' ';
-         //incorrect->play();
+         incorrect->play();
      }
 
   ui->lineEdit_id_2->setText(texte);
@@ -1702,10 +1709,10 @@ for (int i=0; i<texte.size(); i++)
 foreach (const QChar &y, caracteresEtrangers)
     if(texte.at(i)==y)
     {texte[i]=' ';
-    // incorrect->play();
+   incorrect->play();
     }
 
- ui->lineEdit_type_2->setText(texte);
+ ui->comboBox_2->setCurrentText(texte);
 }
 
 void Dialog::on_lineEdit_nb_2_textChanged(const QString &arg1)
@@ -1717,7 +1724,7 @@ void Dialog::on_lineEdit_nb_2_textChanged(const QString &arg1)
      if(texte.at(i)==y)
     {
          texte[i]=' ';
-         //incorrect->play();
+         incorrect->play();
      }
 
   ui->lineEdit_nb_2->setText(texte);
@@ -1733,7 +1740,7 @@ void Dialog::on_lineEdit_sal_textChanged(const QString &arg1)
      if(texte.at(i)==y)
     {
          texte[i]=' ';
-         //incorrect->play();
+         incorrect->play();
      }
 
   ui->lineEdit_sal->setText(texte);
@@ -1750,7 +1757,7 @@ void Dialog::on_lineEdit_cin_textChanged(const QString &arg1)
      if(texte.at(i)==y)
     {
          texte[i]=' ';
-         //incorrect->play();
+         incorrect->play();
      }
 
   ui->lineEdit_cin->setText(texte);
@@ -1762,7 +1769,7 @@ for (int i=0; i<texte.size(); i++)
 foreach (const QChar &y, caracteresEtrangers)
     if(texte.at(i)==y)
     {texte[i]=' ';
-    // incorrect->play();
+   incorrect->play();
     }
 
  ui->lineEdit_nom->setText(texte);
@@ -1774,7 +1781,7 @@ for (int i=0; i<texte.size(); i++)
 foreach (const QChar &y, caracteresEtrangers)
     if(texte.at(i)==y)
     {texte[i]=' ';
-    // incorrect->play();
+   incorrect->play();
     }
 
  ui->lineEdit_prenom->setText(texte);
@@ -1789,7 +1796,7 @@ void Dialog::on_lineEdit_num_maillot_textChanged(const QString &arg1)
      if(texte.at(i)==y)
     {
          texte[i]=' ';
-         //incorrect->play();
+         incorrect->play();
      }
 
  ui->lineEdit_num_maillot->setText(texte);
@@ -1803,7 +1810,7 @@ void Dialog::on_lineEdit_num_maillot_textChanged(const QString &arg1)
    foreach (const QChar &y, caracteresEtrangers)
        if(texte.at(i)==y)
        {texte[i]=' ';
-       // incorrect->play();
+      incorrect->play();
        }
 
     ui->lineEdit_poste->setText(texte);
@@ -1817,7 +1824,7 @@ void Dialog::on_lineEdit_num_maillot_textChanged(const QString &arg1)
         if(texte.at(i)==y)
        {
             texte[i]=' ';
-            //incorrect->play();
+            incorrect->play();
         }
 
     ui->lineEdit_salaire->setText(texte);
@@ -1831,7 +1838,7 @@ void Dialog::on_lineEdit_num_maillot_textChanged(const QString &arg1)
         if(texte.at(i)==y)
        {
             texte[i]=' ';
-            //incorrect->play();
+            incorrect->play();
         }
 
     ui->lineEdit_cap_att->setText(texte);
@@ -1846,7 +1853,7 @@ void Dialog::on_lineEdit_num_maillot_textChanged(const QString &arg1)
         if(texte.at(i)==y)
        {
             texte[i]=' ';
-            //incorrect->play();
+            incorrect->play();
         }
 
     ui->lineEdit_cap_def->setText(texte);
@@ -1862,7 +1869,7 @@ void Dialog::on_lineEdit_num_maillot_textChanged(const QString &arg1)
         if(texte.at(i)==y)
        {
             texte[i]=' ';
-            //incorrect->play();
+            incorrect->play();
         }
 
    ui->lineEdit_id->setText(texte);
@@ -1876,7 +1883,7 @@ void Dialog::on_lineEdit_num_maillot_textChanged(const QString &arg1)
         if(texte.at(i)==y)
        {
             texte[i]=' ';
-            //incorrect->play();
+            incorrect->play();
         }
 
    ui->lineEdit_type->setText(texte);
@@ -1890,7 +1897,7 @@ void Dialog::on_lineEdit_num_maillot_textChanged(const QString &arg1)
         if(texte.at(i)==y)
        {
             texte[i]=' ';
-            //incorrect->play();
+            incorrect->play();
         }
 
    ui->lineEdit_nb->setText(texte);
@@ -1904,7 +1911,7 @@ void Dialog::on_lineEdit_num_maillot_textChanged(const QString &arg1)
    foreach (const QChar &y, caracteresEtrangers)
        if(texte.at(i)==y)
        {texte[i]=' ';
-       // incorrect->play();
+      incorrect->play();
        }
 
      ui->lineEdit_id_3->setText(texte);
@@ -1918,7 +1925,7 @@ void Dialog::on_lineEdit_num_maillot_textChanged(const QString &arg1)
           if(texte.at(i)==y)
          {
               texte[i]=' ';
-              //incorrect->play();
+              incorrect->play();
           }
 
      ui->lineEdit_nbticket->setText(texte);
@@ -1931,7 +1938,7 @@ void Dialog::on_lineEdit_num_maillot_textChanged(const QString &arg1)
           if(texte.at(i)==y)
          {
               texte[i]=' ';
-              //incorrect->play();
+              incorrect->play();
           }
 
      ui->lineEdit_prix_2->setText(texte);
@@ -1945,7 +1952,7 @@ void Dialog::on_lineEdit_num_maillot_textChanged(const QString &arg1)
        foreach (const QChar &y, caracteresEtrangers)
            if(texte.at(i)==y)
            {texte[i]=' ';
-           // incorrect->play();
+           incorrect->play();
            }
 
         ui->lineEdit_ctqui->setText(texte);
@@ -1957,31 +1964,31 @@ void Dialog::on_lineEdit_num_maillot_textChanged(const QString &arg1)
        foreach (const QChar &y, caracteresEtrangers)
            if(texte.at(i)==y)
            {texte[i]=' ';
-           // incorrect->play();
+           incorrect->play();
            }
 
         ui->lineEdit_placement->setText(texte);
        }
-       void Dialog::on_lineEdit_type_3_textEdited(const QString &arg1)  {
+      /* void Dialog::on_lineEdit_type_3_textEdited(const QString &arg1)  {
            QString texte=arg1;
        QString caracteresEtrangers(CARACTERES_ETRANGERS);
        for (int i=0; i<texte.size(); i++)
        foreach (const QChar &y, caracteresEtrangers)
            if(texte.at(i)==y)
            {texte[i]=' ';
-           // incorrect->play();
+          incorrect->play();
            }
 
         ui->lineEdit_type_3->setText(texte);
-       }
+       }*/
 
 
 void Dialog::on_pushButton_modifanis1_clicked()
 {
     QString ctqui= ui->lineEdit_ctqui->text();
-    QString dat= ui->lineEdit_date->text();
+    QDate dat= ui->dateEdit_2->date();
     QString placement= ui->lineEdit_placement->text();
-    QString type= ui->lineEdit_type_3->text();
+    QString type= ui->comboBox->currentText();
     QString etat= ui->lineEdit_etat->text();
   match e(ctqui,dat,placement,type,etat);
   bool test=e.modifier();
@@ -2027,4 +2034,60 @@ void Dialog::on_pb_ajouter_menuanis_clicked()
 void Dialog::on_pushButton_match_clicked()
 {
      ui->stackedWidget->setCurrentIndex(5);
+}
+
+void Dialog::on_tabmatch_clicked(const QModelIndex &index)
+{
+    QSqlQueryModel * model=tmpmatch.afficher();
+         int idx = ui->tabmatch->selectionModel()->currentIndex().row();
+        ui->lineEdit_ctqui->setText(model->index(idx , 0).data().toString());
+          ui->dateEdit_2->setDate(model->index(idx , 1).data().toDate());
+          ui->lineEdit_placement->setText(model->index(idx , 2).data().toString());
+
+
+        ui->comboBox->setCurrentText(model->index(idx , 3).data().toString());
+        ui->lineEdit_etat->setText(model->index(idx , 4).data().toString());
+
+
+}
+
+void Dialog::on_tabbillet_clicked(const QModelIndex &index)
+{
+    QSqlQueryModel * model=tmpbillet.afficher();
+         int idx = ui->tabbillet->selectionModel()->currentIndex().row();
+        ui->lineEdit_id_3->setText(model->index(idx , 0).data().toString());
+        ui->lineEdit_nbticket->setText(model->index(idx , 1).data().toString());
+        ui->lineEdit_prix_2->setText(model->index(idx , 2).data().toString());
+}
+
+void Dialog::on_pb_ajouter_image_clicked()
+{
+    QString filename = QFileDialog::getOpenFileName(this,tr("choose"), "" , tr("image (*.png *.jpg *.jpeg *.bmp *.gif)"));
+            if ( QString::compare(filename, QString()) != 0 )
+            {
+                QImage image;
+                bool valid =image.load(filename);
+                if (valid)
+                {
+                    ui->chemin->setText(filename);
+                    image =image.scaledToWidth(ui->photo->width(),Qt::SmoothTransformation);
+                    ui->photo->setPixmap(QPixmap::fromImage(image));
+}
+            }
+}
+
+void Dialog::on_pb_modifier_image_clicked()
+{
+    QString filename = QFileDialog::getOpenFileName(this,tr("choose"), "" , tr("image (*.png *.jpg *.jpeg *.bmp *.gif)"));
+            if ( QString::compare(filename, QString()) != 0 )
+            {
+                QImage image;
+                bool valid =image.load(filename);
+                if (valid)
+                {
+                    ui->chemin->setText(filename);
+                    image =image.scaledToWidth(ui->photo->width(),Qt::SmoothTransformation);
+                    ui->photo->setPixmap(QPixmap::fromImage(image));
+}
+            }
 }

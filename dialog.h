@@ -24,10 +24,16 @@ public:
     ~Dialog();
     //QMediaPlayer *correct =new QMediaPlayer();
     QMediaPlayer *incorrect =new QMediaPlayer();
+     QMediaPlayer *mat =new QMediaPlayer();
+     QMediaPlayer *abo =new QMediaPlayer();
+      QMediaPlayer *jou =new QMediaPlayer();
+       QMediaPlayer *mag =new QMediaPlayer();
+        QMediaPlayer *sta =new QMediaPlayer();
     private slots:
     void sendMail();
     void sendMail1();
     void sendMail2();
+    void sendMail3();
     void mailSent(QString);
     void initialiser_0();
     void initialiser();
@@ -232,7 +238,7 @@ public:
      //------match--------------------------------------------------------------------------------------------------------
        void on_lineEdit_ctqui_textChanged(const QString &arg1) ;
        void on_lineEdit_placement_textEdited(const QString &arg1) ;
-       void on_lineEdit_type_3_textEdited(const QString &arg1) ;
+      // void on_lineEdit_type_3_textEdited(const QString &arg1) ;
 
 
        void on_pushButton_modifanis1_clicked();
@@ -250,6 +256,18 @@ public:
        void on_pb_ajouter_image_clicked();
 
        void on_pb_modifier_image_clicked();
+
+
+
+       void on_pushButton_27_clicked();
+
+       void on_pushButton_28_clicked();
+
+       void on_pushButton_29_clicked();
+
+       void on_pushButton_30_clicked();
+
+       void on_pushButton_31_clicked();
 
 private:
     Ui::Dialog *ui;

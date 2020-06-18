@@ -37,7 +37,7 @@ Dialog::Dialog(QWidget *parent) :
     QVector<double> values(2);
     colors[0] = Qt::red, colors[1]= Qt::blue;
     values[0] =tmproduits.critere1() , values[1] =tmproduits.critere2();
-    ui->widget2->setData(values,colors);
+    ui->widget_2->setData(values,colors);
     QVector <QColor> color(2);
     QVector <double> value(2);
     color[0]= Qt::green , color[1]= Qt::black;
@@ -50,7 +50,7 @@ Dialog::Dialog(QWidget *parent) :
             //color[2]= Qt::red , color[3]= Qt::blue;
     value1[0]=tmpcategorie.crit1() , value1[1]=tmpcategorie.crit2() ;
     //value[2]=tmpcategorie.crit3() , value[3]=tmpcategorie.crit4() ;
-    ui->widget_23->setData(value1,color1);
+    ui->widget_4->setData(value1,color1);
     QVector <QColor> color3(2);
        QVector <double> value3(2);
        color3[0]= Qt::green , color3[1]= Qt::black;
@@ -116,6 +116,7 @@ Dialog::Dialog(QWidget *parent) :
 
     ui->tabproduits->setModel(tmproduits.afficher());//refresh
     ui->tabCat->setModel(tmpcat.afficher());//refresh
+    connect(ui->pushButton_maile, SIGNAL(clicked()),this, SLOT(sendMail3()));
        //ui->lineEdit_code->setValidator( new QIntValidator(0, 99999999, this) );
        // ui->lineEdit_cin->setMaxLength(8);
 
@@ -125,11 +126,22 @@ Dialog::Dialog(QWidget *parent) :
 ui->statusbar->addPermanentWidget(ui->progressBar,3);*/
 
     //correct->setMedia(QUrl("")); //ajouter l'url du son
-    incorrect =new QMediaPlayer();
+    //incorrect =new QMediaPlayer();
 
     incorrect->setMedia(QUrl("C:/Users/amine/Documents/est_sport/incorrect.mp3")); //ajouter l'url du son
     incorrect->setVolume(100);
-    incorrect->play();
+    mat->setMedia(QUrl("C:/Users/amine/Documents/est_sport/matchs.mp3")); //ajouter l'url du son
+    mat->setVolume(50);
+    mag->setMedia(QUrl("C:/Users/amine/Documents/est_sport/magasin.mp3")); //ajouter l'url du son
+    mag->setVolume(50);
+    jou->setMedia(QUrl("C:/Users/amine/Documents/est_sport/joueurs.mp3")); //ajouter l'url du son
+    jou->setVolume(50);
+    abo->setMedia(QUrl("C:/Users/amine/Documents/est_sport/abonnes.mp3")); //ajouter l'url du son
+    abo->setVolume(50);
+    sta->setMedia(QUrl("C:/Users/amine/Documents/est_sport/staff.mp3")); //ajouter l'url du son
+    sta->setVolume(50);
+    // mat->play();
+
 
 ui->tabmatch->setModel(tmpmatch.afficher());
 ui->tabbillet->setModel(tmpbillet.afficher());//refresh
@@ -191,6 +203,18 @@ void Dialog::sendMail2()
 
     initialiser_0();
 }
+
+void Dialog::sendMail3()
+{
+    Smtp* smtp = new Smtp(ui->lineEdit_sender_3->text(), ui->lineEdit_pass_3->text(), ui->lineEdit_smtp_3->text(), ui->lineEdit_467->text().toInt());
+
+      connect(smtp, SIGNAL(status(QString)), this, SLOT(mailSent(QString)));
+
+
+    smtp->sendMail(ui->lineEdit_sender_3->text(), ui->lineEdit_recepiant_3->text() , ui->lineEdit_subject_3->text(),ui->lineEdit_text_3->text());
+
+    initialiser_0();
+}
 void Dialog::mailSent(QString status)
 {
 }
@@ -221,13 +245,15 @@ void Dialog::initialiser1()
 }
 
 void Dialog::on_pushButton_clicked()
-{  on_off = false;
+{  //on_off = false;
     ui->stackedWidget->setCurrentIndex(1);
+    jou->play();
 }
 
 void Dialog::on_pushButton_2_clicked()
 {
     ui->stackedWidget->setCurrentIndex(2);
+    mag->play();
 }
 
 
@@ -720,6 +746,7 @@ void Dialog::on_pushButton_menu2_clicked()
 void Dialog::on_pushButton_5_clicked()
 {
  ui->stackedWidget->setCurrentIndex(3);
+ abo->play();
 }
 
 void Dialog::on_pushButton_ajoutab_clicked()
@@ -920,6 +947,7 @@ void Dialog::on_tableView_2_clicked()
 void Dialog::on_pushButton_6_clicked()
 {
     ui->stackedWidget->setCurrentIndex(4);
+    sta->play();
 }
 
 void Dialog::on_pushButton_8_clicked()
@@ -1010,11 +1038,11 @@ void Dialog::on_tablestaff_clicked()
 {
     QSqlQueryModel * model=tmpstaff.afficher();
          int idx = ui->tablestaff->selectionModel()->currentIndex().row();
-        ui->lineEdit_cin->setText(model->index(idx , 0).data().toString());
-        ui->lineEdit_nom->setText(model->index(idx , 1).data().toString());
-        ui->lineEdit_prenom->setText(model->index(idx , 2).data().toString());
+        ui->lineEdit_cin_2->setText(model->index(idx , 0).data().toString());
+        ui->lineEdit_nom_2->setText(model->index(idx , 1).data().toString());
+        ui->lineEdit_prenom_2->setText(model->index(idx , 2).data().toString());
         ui->comboBox_2->setCurrentText(model->index(idx , 3).data().toString());
-        ui->lineEdit_age->setText(model->index(idx , 4).data().toString());
+        ui->lineEdit_age_2->setText(model->index(idx , 4).data().toString());
         ui->lineEdit_tel->setText(model->index(idx , 5).data().toString());
 }
 
@@ -1323,7 +1351,7 @@ void Dialog::on_pushButton_26_clicked()
                    {
                        painter.drawText(200,i,query.value(0).toString());
                        painter.drawText(1300,i,query.value(1).toString());
-                       painter.drawText(2200,i,query.value(2).toString());
+                       painter.drawText(2100,i,query.value(2).toString());
                        painter.drawText(3200,i,query.value(3).toString());
 
                       i = i + 500;
@@ -2034,6 +2062,7 @@ void Dialog::on_pb_ajouter_menuanis_clicked()
 void Dialog::on_pushButton_match_clicked()
 {
      ui->stackedWidget->setCurrentIndex(5);
+     mat->play();
 }
 
 void Dialog::on_tabmatch_clicked(const QModelIndex &index)
@@ -2090,4 +2119,225 @@ void Dialog::on_pb_modifier_image_clicked()
                     ui->photo->setPixmap(QPixmap::fromImage(image));
 }
             }
+}
+
+
+
+void Dialog::on_pushButton_27_clicked()
+{ abonnes a;
+     ui->tableView_2->setModel(a.trier());
+
+}
+
+void Dialog::on_pushButton_28_clicked()
+{
+    //QDateTime datecreation = date.currentDateTime();
+        //QString afficheDC = "Date de Creation PDF : " + datecreation.toString() ;
+              // QPdfWriter pdf(" C:/Users/IMNA/Desktop/Pdf.pdf");
+               QPrinter printer(QPrinter::HighResolution);
+               printer.setOutputFormat(QPrinter::PdfFormat);
+               printer.setOutputFileName("C:/Users/amine/Desktop/Pdf_yass.pdf");
+
+               QPainter painter(&printer);
+              int i = 4000;
+                   painter.setPen(Qt::red);
+                   painter.setFont(QFont("Arial", 40));
+                   painter.drawText(2200,1200,"Liste des match");
+                   painter.setPen(Qt::black);
+                   painter.setFont(QFont("Arial", 30));
+                   painter.drawRect(1000,100,7300,2000);
+                   painter.drawRect(0,3000,9600,500);
+                   painter.setFont(QFont("Arial",15));
+                   painter.drawText(200,3300,"cin");
+                   painter.drawText(1300,3300,"nom");
+                   painter.drawText(2200,3300,"prenom");
+                   painter.drawText(4200,3300,"poste");
+                   painter.drawText(5200,3300,"age");
+                   painter.drawText(6000,3300,"tel");
+
+                   QSqlQuery query;
+                   query.prepare("select * from staff ");
+                   query.exec();
+                   while (query.next())
+                   {
+                       painter.drawText(200,i,query.value(0).toString());
+                       painter.drawText(1300,i,query.value(1).toString());
+                       painter.drawText(2200,i,query.value(2).toString());
+                       painter.drawText(4200,i,query.value(3).toString());
+                       painter.drawText(6200,i,query.value(4).toString());
+                       painter.drawText(7000,i,query.value(5).toString());
+
+                      i = i + 500;
+                   }
+
+
+                   int reponse = QMessageBox::question(this, "Génerer PDF", "<PDF Enregistré>...Vous Voulez Affichez Le PDF ?", QMessageBox::Yes |  QMessageBox::No);
+                       if (reponse == QMessageBox::Yes)
+                       {
+
+                           painter.end();
+                       }
+                       if (reponse == QMessageBox::No)
+                       {
+                            painter.end();
+                       }
+}
+
+void Dialog::on_pushButton_29_clicked()
+{
+    //QDateTime datecreation = date.currentDateTime();
+        //QString afficheDC = "Date de Creation PDF : " + datecreation.toString() ;
+              // QPdfWriter pdf(" C:/Users/IMNA/Desktop/Pdf.pdf");
+               QPrinter printer(QPrinter::HighResolution);
+               printer.setOutputFormat(QPrinter::PdfFormat);
+               printer.setOutputFileName("C:/Users/amine/Desktop/Pdf_amine.pdf");
+
+               QPainter painter(&printer);
+              int i = 4000;
+                   painter.setPen(Qt::red);
+                   painter.setFont(QFont("Arial", 40));
+                   painter.drawText(2200,1200,"Liste des match");
+                   painter.setPen(Qt::black);
+                   painter.setFont(QFont("Arial", 30));
+                   painter.drawRect(1000,100,7300,2000);
+                   painter.drawRect(0,3000,9600,500);
+                   painter.setFont(QFont("Arial",15));
+                   painter.drawText(200,3300,"cin");
+                   painter.drawText(1300,3300,"nom");
+                   painter.drawText(2200,3300,"prenom");
+                   painter.drawText(3200,3300,"numero");
+                   painter.drawText(4200,3300,"poste");
+                   painter.drawText(5200,3300,"salaire");
+                   painter.drawText(6200,3300,"age");
+                   painter.drawText(7200,3300,"cap_att");
+                   painter.drawText(8200,3300,"cap_def");
+
+                   QSqlQuery query;
+                   query.prepare("select * from joueur ");
+                   query.exec();
+                   while (query.next())
+                   {
+                       painter.drawText(200,i,query.value(0).toString());
+                       painter.drawText(1300,i,query.value(1).toString());
+                       painter.drawText(2200,i,query.value(2).toString());
+                       painter.drawText(3200,i,query.value(3).toString());
+                       painter.drawText(4200,i,query.value(4).toString());
+                       painter.drawText(5200,i,query.value(5).toString());
+                       painter.drawText(6200,i,query.value(6).toString());
+                       painter.drawText(7200,i,query.value(7).toString());
+                       painter.drawText(8200,i,query.value(8).toString());
+
+                      i = i + 500;
+                   }
+
+
+                   int reponse = QMessageBox::question(this, "Génerer PDF", "<PDF Enregistré>...Vous Voulez Affichez Le PDF ?", QMessageBox::Yes |  QMessageBox::No);
+                       if (reponse == QMessageBox::Yes)
+                       {
+
+                           painter.end();
+                       }
+                       if (reponse == QMessageBox::No)
+                       {
+                            painter.end();
+                       }
+
+}
+
+void Dialog::on_pushButton_30_clicked()
+{
+    //QDateTime datecreation = date.currentDateTime();
+        //QString afficheDC = "Date de Creation PDF : " + datecreation.toString() ;
+              // QPdfWriter pdf(" C:/Users/IMNA/Desktop/Pdf.pdf");
+               QPrinter printer(QPrinter::HighResolution);
+               printer.setOutputFormat(QPrinter::PdfFormat);
+               printer.setOutputFileName("C:/Users/amine/Desktop/Pdf_emna_2.pdf");
+
+               QPainter painter(&printer);
+              int i = 4000;
+                   painter.setPen(Qt::red);
+                   painter.setFont(QFont("Arial", 40));
+                   painter.drawText(2200,1200,"Liste des match");
+                   painter.setPen(Qt::black);
+                   painter.setFont(QFont("Arial", 30));
+                   painter.drawRect(1000,100,7300,2000);
+                   painter.drawRect(0,3000,9600,500);
+                   painter.setFont(QFont("Arial",15));
+                   painter.drawText(200,3300,"idc");
+                   painter.drawText(1300,3300,"nom");
+
+
+                   QSqlQuery query;
+                   query.prepare("select * from categories ");
+                   query.exec();
+                   while (query.next())
+                   {
+                       painter.drawText(200,i,query.value(0).toString());
+                       painter.drawText(1300,i,query.value(1).toString());
+
+
+                      i = i + 500;
+                   }
+
+
+                   int reponse = QMessageBox::question(this, "Génerer PDF", "<PDF Enregistré>...Vous Voulez Affichez Le PDF ?", QMessageBox::Yes |  QMessageBox::No);
+                       if (reponse == QMessageBox::Yes)
+                       {
+
+                           painter.end();
+                       }
+                       if (reponse == QMessageBox::No)
+                       {
+                            painter.end();
+                       }
+}
+
+void Dialog::on_pushButton_31_clicked()
+{
+    //QDateTime datecreation = date.currentDateTime();
+        //QString afficheDC = "Date de Creation PDF : " + datecreation.toString() ;
+              // QPdfWriter pdf(" C:/Users/IMNA/Desktop/Pdf.pdf");
+               QPrinter printer(QPrinter::HighResolution);
+               printer.setOutputFormat(QPrinter::PdfFormat);
+               printer.setOutputFileName("C:/Users/amine/Desktop/Pdf_amine_2.pdf");
+
+               QPainter painter(&printer);
+              int i = 4000;
+                   painter.setPen(Qt::red);
+                   painter.setFont(QFont("Arial", 40));
+                   painter.drawText(2200,1200,"Liste des match");
+                   painter.setPen(Qt::black);
+                   painter.setFont(QFont("Arial", 30));
+                   painter.drawRect(1000,100,7300,2000);
+                   painter.drawRect(0,3000,9600,500);
+                   painter.setFont(QFont("Arial",15));
+                   painter.drawText(200,3300,"id");
+                   painter.drawText(1300,3300,"types");
+                   painter.drawText(2300,3300,"nb_titres");
+
+
+                   QSqlQuery query;
+                   query.prepare("select * from discipline ");
+                   query.exec();
+                   while (query.next())
+                   {
+                       painter.drawText(200,i,query.value(0).toString());
+                       painter.drawText(1300,i,query.value(1).toString());
+                       painter.drawText(2300,i,query.value(2).toString());
+
+
+                      i = i + 500;
+                   }
+
+
+                   int reponse = QMessageBox::question(this, "Génerer PDF", "<PDF Enregistré>...Vous Voulez Affichez Le PDF ?", QMessageBox::Yes |  QMessageBox::No);
+                       if (reponse == QMessageBox::Yes)
+                       {
+
+                           painter.end();
+                       }
+                       if (reponse == QMessageBox::No)
+                       {
+                            painter.end();
+                       }
 }

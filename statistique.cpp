@@ -7,11 +7,11 @@ statistique::statistique(QWidget *parent) : QWidget(parent)
 
 double statistique::total()
 {
-   // QString maRequete = "SELECT COUNT (*) FROM JOUEUR";
-       QSqlQuery query("SELECT COUNT (*) FROM JOUEUR");
+   // QString maRequete = "SELECT COUNT (*) FROM abonnement";
+       QSqlQuery query("SELECT COUNT (*) FROM abonnement");
        query.next();
-       double nbjoueur = query.value(0).toDouble();
-       return nbjoueur;
+       double nbprix = query.value(0).toDouble();
+       return nbprix;
 
 }
 
@@ -24,7 +24,6 @@ void statistique::setData(QVector<double> value, QVector<QColor> color)
     repaint();
     update();
 }
-
 
 void statistique::paintEvent(QPaintEvent *)
 

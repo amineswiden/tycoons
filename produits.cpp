@@ -126,7 +126,7 @@ QSqlQueryModel * Produits:: trier ()
 
 double Produits::critere1()
 {
-    QSqlQuery query("SELECT COUNT (*) FROM produits WHERE prix > 10");
+    QSqlQuery query("SELECT COUNT (*) FROM produits WHERE prix > 50");
            query.next();
            double nbprod = query.value(0).toDouble();
            return nbprod;
@@ -134,7 +134,7 @@ double Produits::critere1()
 
 double Produits::critere2()
 {
-    QSqlQuery query("SELECT COUNT (*) FROM produits WHERE prix <= 10");
+    QSqlQuery query("SELECT COUNT (*) FROM produits WHERE prix <= 50");
            query.next();
            double nbprod1 = query.value(0).toDouble();
            return nbprod1;
